@@ -60,15 +60,15 @@ export default class Control extends React.Component {
 			.then(json => {
 				if (json !== undefined) {
 					this.setState({
-						valid: true, 
-						data: {...json.items[0].snippet, url}
+						valid: true,
+						data: { ...json.items[0].snippet, url }
 					});
 				} else {
 					this.setState({ valid: false });
 				}
 			})
 			.catch(err => {
-				console.log({err});
+				console.log({ err });
 				this.setState({ valid: false, data: {} });
 				return false;
 			});
@@ -134,15 +134,64 @@ export default class Control extends React.Component {
 										alt={data.title}
 									/>
 								</div>
-								<div className="nc-imageControl-textWrapper">
-									<strong
-										style={{ display: "block" }}
-										className="nc-imageControl-title">
-										{data.title}
-									</strong>
-									<span className="nc-imageControl-description">
-										{`${data.description.substring(150, length - 1)}...`}
-									</span>
+								<div
+									className="nc-imageControl-textWrapper"
+									style={{
+										width: "100%",
+									}}
+									>
+									<div className="nc-controlPane-control">
+										<ul className="nc-controlPane-errors"></ul>
+										<label className="nc-controlPane-label" for="youtube_widget4">Başlık</label>
+										<div className="nc-controlPane-widget" id="youtube_widget1">
+											<span className="nc-imageControl-message">
+												<input
+													type="text"
+													placeholder="Başlık"
+													style={{ width: "100%", fontSize: "1rem" }}
+													value={data.title}
+												/>
+											</span>
+										</div>
+									</div>
+									<div className="nc-controlPane-control">
+										<ul className="nc-controlPane-errors"></ul>
+										<label className="nc-controlPane-label" for="description">Açıklama</label>
+										<textarea
+											id="description"
+											className="nc-controlPane-widget"
+											style={{ minHeight: "140px", height: "58px" }}
+											value={data.description}
+										/>
+									</div>
+									<div className="nc-controlPane-control">
+										<ul className="nc-controlPane-errors"></ul>
+										<label className="nc-controlPane-label" for="publishedAt">Yayım Tarihi</label>
+										<div className="nc-controlPane-widget" id="publishedAt">
+											<span className="nc-imageControl-message">
+												<input
+													type="text"
+													placeholder="Yayım Tarihi"
+													style={{ width: "100%", fontSize: "1rem" }}
+													value={data.publishedAt}
+												/>
+											</span>
+										</div>
+									</div>
+									<div className="nc-controlPane-control">
+										<ul className="nc-controlPane-errors"></ul>
+										<label className="nc-controlPane-label" for="keywords">Anahtar Kelimeler</label>
+										<div className="nc-controlPane-widget" id="keywords">
+											<span className="nc-imageControl-message">
+												<input
+													type="text"
+													placeholder="Yayım Tarihi"
+													style={{ width: "100%", fontSize: "1rem" }}
+													value={data.tags.join(', ')}
+												/>
+											</span>
+										</div>
+									</div>
 									<span
 										style={{
 											position: "absolute",
@@ -159,8 +208,8 @@ export default class Control extends React.Component {
 								</div>
 							</div>
 						) : (
-							""
-						)}
+								""
+							)}
 						<input
 							type="text"
 							style={{

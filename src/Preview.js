@@ -12,6 +12,7 @@ export default class Preview extends React.Component {
 
 	getImage(videoInfo) {
 		if (videoInfo) {
+			console.log({videoInfo});
 			return urlParser.create({
 				videoInfo,
 				format: "longImage",
